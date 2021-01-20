@@ -110,8 +110,8 @@ shape* ps=new circle();
 ```
 - 经由virtual function机制
 
-经由虚函数的多态可以避免由于“借助某一特定library的materials
-”而导致变动无常，使得
+经由虚函数的多态可以避免由于“借助某一特定library的materials”而导致变动无常，使得
+
     - 当类型有所增加，修改或删除时，我们的程序代码无需改变
     - 使一个新的Library_materials subtype的供应者不许重新写出对继承体系中所有类型都共通的行为和操作。
 - 经由dynamic_cast和typeid运算符
