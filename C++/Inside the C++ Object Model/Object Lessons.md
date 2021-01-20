@@ -93,4 +93,41 @@ C struct在C++中的唯一合理用途，只在于在组合的情况下，将数
 如果在继承关系下，编译器会决定是否应该有额外的data member被安置在base struct subobject中
 
 ### 1.3 对象的差异
+在C++中，多态只存在于一个个public class体系中，要求此object必须可以经由一个pointer或reference来存取，才支持OO的多态性质
+```C++
+class Book:public Library_materials{};
+Library_materials thing1;
+Book book;
+thing1=book;//book被裁切为thing1
+thing1.check_in();//调用的是Library_materials.check_in();
+Library_materials& thing2=book;
+thing2.check_in();//调用的是Book.check_in();
+```
+C++以下列方法支持多态
+- 经由一组隐式的转换操作，例如将一个derived class指针转换为一个指向其public base class的指针
+```C++
+shape* ps=new circle();
+```
+- 经由virtual function机制
+
+经由虚函数的多态可以避免由于“借助某一特定library的materials
+”而导致变动无常，使得
+    - 当类型有所增加，修改或删除时，我们的程序代码无需改变
+    - 使一个新的Library_materials subtype的供应者不许重新写出对继承体系中所有类型都共通的行为和操作。
+- 经由dynamic_cast和typeid运算符
+```C++
+if(circle *pc=dynamic_cast<circle* >(ps)){}
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
