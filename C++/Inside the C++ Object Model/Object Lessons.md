@@ -118,16 +118,24 @@ shape* ps=new circle();
 ```C++
 if(circle *pc=dynamic_cast<circle* >(ps)){}
 ```
+指向不同类型的各个指针之间的差异，既不在其指针表示法不同，也不在其内容（代表一个地址）不同，而是在其寻址出来的object不同。
 
+即指针类型会教导编译器如何解释某个特定地址中的内存内容及大小。
 
+转换（cast)其实是一种编译器指令，大部分情况下它并不改变一个指针所含的真正地址，它只影响“被指出之内存的大小和其内容”的解释方式。
 
+```C++
+class Bear: public ZooAnimal{};
+Bear b;
+ZooAnimal *pz=&b;
+Bear* pb=&b;
+```
+两个指针均指向Bear Object中的第一个byte,其间的差别是:
+- pb所涵盖的地址包含整个Bear object.
+- 而pz所涵盖的地址只包含Bear object中的ZooAnimal subobject.
 
+除了ZooAnimal subobject中出现的members，不能使用pz来直接处理Bear的任何members,唯一例外是使用virtual机制。
 
-
-
-
-
-
-
-
-
+一个OB(Object-based)设计可能比一个对等的OO设计速度更快且空间更紧凑。
+- 速度快是因为所有的函数调用操作都在编译时期解析完成，对象构建起来时不用设置virtual机制。
+- 空间紧凑是因为每一个class object不需要再负担传统上为了支持virtual机制需要额外符合。
